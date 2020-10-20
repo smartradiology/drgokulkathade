@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<title>Smart Reporting Tool</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<link rel=icon href=tl-x1.png type=image/jpg>
+<link rel="shortcut icon" href=tl-x1.png type=image/x-icon>
+<script src=assets/jquery.min.js></script>
+<script src=assets/csv.js></script>
+<link rel=stylesheet href=assets/bootstrap.min.css>
+<link rel=stylesheet href=assets/sb-admin-2.min.css>
+<script src=assets/jquery.min.js></script>
+<script src=assets/popper.min.js></script>
+<script src=assets/bootstrap.min.js></script>
+<script src=assets/myapp.js></script>
+<script src=assets/typeahead.bundle.js></script>
+<style>.bs-example{font-family:sans-serif;position:relative;margin:100px}.typeahead,.tt-query,.tt-hint{border:2px solid #ccc;border-radius:8px;font-size:12px;height:30px;line-height:30px;outline:medium none;padding:8px 12px}.typeahead{background-color:#fff}.typeahead:focus{border:2px solid #0097cf}.tt-query{box-shadow:0 1px 1px rgba(0,0,0,0.075) inset}.tt-hint{color:#999}.tt-dropdown-menu{background-color:#fff;border:1px solid rgba(0,0,0,0.2);border-radius:8px;box-shadow:0 5px 10px rgba(0,0,0,0.2);margin-top:12px;padding:8px 0;// width:422px}.tt-suggestion{font-size:24px;line-height:24px;padding:3px 20px}.tt-suggestion.tt-is-under-cursor{background-color:#0097cf;color:#fff}.tt-suggestion p{margin:0}.twitter-typeahead{width:100%;display:block!important}</style>
+</head>
+<body id=page-top>
+<div id=wrapper>
+<div id=content-wrapper class="d-flex flex-column">
+<div id=content>
+<div class=container-fluid style=text-align:center>
+<br>
+<div class=row>
+<div class=col-lg-12>
+<div class="card shadow mb-4">
+<div class="card-header py-3">
+<h2 class="m-0 font-weight-bold text-primary">
+Smart Reporting tool for Dr. Gokul Kathade <span style=font-size:16px>(M.D. Radiology)</span></h2>
+<hr>
+<h6>Developed By <img alt="Tarkik Labs" src=tl-x1.png style=background:transparent> Tarkik Labs</h6>
+</div>
+<div class=card-body>
+<div class=row>
+<div class=col-lg-6>
+<div class=form-group>
+<input type=text class=form-control placeholder="Enter Name of Patient" id=patientName>
+</div>
+</div>
+<div class=col-lg-6>
+<div class=form-group>
+<select name=typeOfReport class=custom-select id=typeOfReport onchange=javascript:populateReportData()>
+<option selected>Type of Report</option>
+</select>
+</div>
+</div>
+</div>
+<div class=row>
+<div class=col-lg-6>
+<div class="form-group border border-info" style=text-align:left;padding:15px>
+<div class=overflow-auto>
+<label for=observations style=font-size:20px;font-weight:bold;color:brown>Observations</label>
+<div id=observations></div>
+</div>
+<div class=form-group>
+<input type=text class="form-control typeahead tt-query" autocomplete=off spellcheck=false id=autoCompleteBox_observations placeholder="Enter additional Observations here!">
+</div>
+<div class=form-group style=text-align:right>
+<button type=button id=search class="btn btn-sm btn-light" onclick="javascript:clearData('autoCompleteBox_observations')">
+<span class=input-group-addon>Clear</span>
+</button>
+<button type=button id=search class="btn btn-sm btn-warning" onclick="javascript:addTypedOptions('observations','OBSERVATION')">
+<span class=input-group-addon>Add</span>
+</button>
+</div>
+</div>
+<div class="form-group border border-info" style=text-align:left;padding:15px>
+<div class=overflow-auto>
+<label for=impressions style=font-size:20px;font-weight:bold;color:brown>Impressions</label>
+<div id=impressions></div>
+</div>
+<div class=form-group>
+<input type=text class="form-control typeahead tt-query" autocomplete=off spellcheck=false id=autoCompleteBox_impressions placeholder="Enter additional impressions here!">
+</div>
+<div class=form-group style=text-align:right>
+<button type=button id=search class="btn btn-sm btn-light" onclick="javascript:clearData('autoCompleteBox_impressions')">
+<span class=input-group-addon>Clear</span>
+</button>
+<button type=button id=search class="btn btn-sm btn-warning" onclick="javascript:addTypedOptions('impressions','IMPRESSION')">
+<span class=input-group-addon>Add</span>
+</button>
+</div>
+</div>
+</div>
+<div class=col-lg-6>
+<div class="form-group border border-info" style=text-align:left;padding:15px>
+<div class=overflow-auto>
+<label for=protocols style=font-size:20px;font-weight:bold;color:brown>Protocol</label>
+<div id=protocols></div>
+</div>
+<div class=form-group>
+<input type=text class="form-control typeahead tt-query" autocomplete=off spellcheck=false id=autoCompleteBox_protocols placeholder="Enter additional protocols here!">
+</div>
+<div class=form-group style=text-align:right>
+<button type=button id=search class="btn btn-sm btn-light" onclick="javascript:clearData('autoCompleteBox_protocols')">
+<span class=input-group-addon>Clear</span>
+</button>
+<button type=button id=search class="btn btn-sm btn-warning" onclick="javascript:addTypedOptions('protocols','PROTOCOL')">
+<span class=input-group-addon>Add</span>
+</button>
+</div>
+</div>
+<div class="form-group border border-info" style=text-align:left;padding:15px>
+<div class=overflow-auto>
+<label for=conclusions style=font-size:20px;font-weight:bold;color:brown>Conclusions</label>
+<div id=conclusions></div>
+</div>
+<div class=form-group>
+<input type=text class="form-control typeahead tt-query" autocomplete=off spellcheck=false id=autoCompleteBox_conclusions placeholder="Enter additional conclusions here!">
+</div>
+<div class=form-group style=text-align:right>
+<button type=button id=search class="btn btn-sm btn-light" onclick="javascript:clearData('autoCompleteBox_conclusions')">
+<span class=input-group-addon>Clear</span>
+</button>
+<button type=button id=search class="btn btn-sm btn-warning" onclick="javascript:addTypedOptions('conclusions','CONCLUSION')">
+<span class=input-group-addon>Add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class=row>
+<div class=col-lg-12>
+<div class="form-group border border-info" style=text-align:left;padding:15px>
+<div class=overflow-auto>
+<label for=suggestions style=font-size:20px;font-weight:bold;color:brown>Suggestions</label>
+<div id=suggestions></div>
+</div>
+<div class=form-group>
+<input type=text class="form-control typeahead tt-query" autocomplete=off spellcheck=false id=autoCompleteBox_suggestions placeholder="Enter additional suggestions here!">
+</div>
+<div class=form-group style=text-align:right>
+<button type=button id=search class="btn btn-sm btn-light" onclick="javascript:clearData('autoCompleteBox_suggestions')">
+<span class=input-group-addon>Clear</span>
+</button>
+<button type=button id=search class="btn btn-sm btn-warning" onclick="javascript:addTypedOptions('suggestions','SUGGESTION')">
+<span class=input-group-addon>Add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class=row>
+<div class=col-lg-12>
+<div id=exportContent class="border border-info">
+<div style=margin-top:150px;font-family:Arial,Helvetica,sans-serif>
+<div id=r_reportName style=text-align:center;text-transform:uppercase;font-size:22px></div><br>
+<div id=r_ptName style=margin-left:20px;margin-right:20px></div>
+<div id=r_protocol style=text-align:left;margin-left:20px></div>
+<div id=r_observations style=text-align:left;margin-left:20px></div>
+<div id=r_impressions style=text-align:left;margin-left:20px></div>
+<div id=r_conclusion style=text-align:left;margin-left:20px></div>
+<div id=r_suggestions style=text-align:left;margin-left:20px;font-weight:bold></div>
+<div id=r_signature style=text-align:right;margin-right:30px;margin-bottom:20px></div>
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class=row>
+<div class=col-lg-12>
+<button type=button class="btn btn-primary" onclick=javascript:generateReport()>Generate Report</button>
+<button type=button class="btn btn-primary" onclick=javascript:exportWord()>Export Word</button>
+<button type=button class="btn btn-primary" onclick=javascript:exportPDF()>Export PDF</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="sticky-footer bg-white">
+<div class="container my-auto">
+<div class="copyright text-center my-auto">
+<span>Copyright Â© Dr. Gokul P. Kathade & Tarkik Labs </span><img alt="Tarkik Labs" src=tl-x1.png style=background:transparent>(2020)
+</div>
+</div>
+</footer>
+</div>
+</div>
+<a class="scroll-to-top rounded" href=#page-top style=display:none>
+<i class="fas fa-angle-up"></i>
+</a>
+</body>
+</html>
