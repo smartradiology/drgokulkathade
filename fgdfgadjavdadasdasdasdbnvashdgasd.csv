@@ -1,9 +1,9 @@
-﻿ROW_ID,TYPE,VALUE,Sub Value
+ROW_ID,TYPE,VALUE,Sub Value
 REPORT_TYPE,CT_CHEST,CT scan of Chest,
 REPORT_TYPE,CT_BRAIN,CT scan of Brain,
 REPORT_TYPE,CT_ABDOMEN,CT scan of Abdomen,
 REPORT_TYPE,CT_SAMPLE,CT scan of Sample,
-REPORT_TYPE,USG_XXX_1,USG of XXX 1,
+REPORT_TYPE,USG_ABD,Ultrasound of Abdomen,
 REPORT_TYPE,USG_XXX_2,USG of XXX 2,
 REPORT_TYPE,USG_XXX_3,USG of XXX 3,
 REPORT_TYPE,USG_XXX_4,USG of XXX 4,
@@ -14,7 +14,8 @@ REPORT_TYPE,USG_XXX_8,USG of XXX 8,
 REPORT_TYPE,MR_XXX_1,MR for XXX 1,
 REPORT_TYPE,MR_XXX_2,MR for XXX 2,
 REPORT_TYPE,MR_XXX_3,MR for XXX 3,
-PROTOCOL,CT_CHEST,Temp1,
+PROTOCOL,CT_CHEST,A High Resolution plain Spiral CT study of the chest has been performed documented at mediastinal and lung window settings.  Additionally HRCT images have been obtained.,
+PROTOCOL,USG_ABD,,
 PROTOCOL,CT_CHEST,Temp2,
 PROTOCOL,CT_CHEST,Temp3,
 PROTOCOL,CT_BRAIN,Protocol for Brain,
@@ -43,18 +44,16 @@ PROTOCOL,CT_CHEST,XXXXXXXXXXXXX,
 PROTOCOL,CT_CHEST,XXXXXXXXXXXXX,
 PROTOCOL,CT_CHEST,XXXXXXXXXXXXX,
 PROTOCOL,CT_SAMPLE,Sample Protocol,
-OBSERVATION,CT_CHEST,Ob1,
-OBSERVATION,CT_CHEST,Ob2,
+OBSERVATION,CT_CHEST,Trachea and bronchi appear normal,
+OBSERVATION,CT_CHEST,Cardiac chambers appear unremarkable,
 OBSERVATION,CT_SAMPLE,Ob_sample,
-SHORT_CUT,CT_CHEST,SS,Sample shortcut for SS
-SHORT_CUT,CT_CHEST,PP,Sample shortcut for PP
 CONCLUSION,CT_CHEST,Conclusion for CT chest.,
 SUGGESTION,CT_CHEST,Clinical corelation and further evaluation is suggested.,
 IMPRESSION,CT_CHEST,Sample Impression,
 CONCLUSION,CT_CHEST,Sample conclusion,
 SHORT_CUT_PROTOCOL,CT_CHEST,SS,Sample shortcut for SS Protocol
 SHORT_CUT_PROTOCOL,CT_CHEST,PP,Sample shortcut for PP Protocol
-SHORT_CUT_OBSERVATION,CT_CHEST,SS,Sample shortcut for SS OBSERVATION
+SHORT_CUT_OBSERVATION,CT_CHEST,aa,Visualized bone sections-No significant abnormality seen
 SHORT_CUT_OBSERVATION,CT_CHEST,PP,Sample shortcut for PP OBSERVATION
 SHORT_CUT_SUGGESTION,CT_CHEST,SS,Sample shortcut for SS SUGGESTION
 SHORT_CUT_SUGGESTION,CT_CHEST,PP,Sample shortcut for PP SUGGESTION
